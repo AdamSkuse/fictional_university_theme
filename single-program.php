@@ -4,7 +4,6 @@
     the_post(); 
     pageBanner();
 ?>
-
     
   <div class="container container--narrow page-section">
     <div class="metabox metabox--position-up metabox--with-home-link">
@@ -75,6 +74,21 @@
          $homepageEvents->the_post();
          get_template_part('template-parts/content-event'); 
          }
+        }
+
+        wp_reset_postdata();
+        $relatedCampuses = get_field('related_campus');
+        if ($relatedCampuses) {
+          echo '<hr class="section-break">';
+          echo '<h2 class="headline headline--medium">' . get_the_title() . ' Is Available At These Campuses:</h2>';
+          
+          echo '<ul class="min-list link-list">';
+          forEach ($relatedCampuses as $campus) {
+            ?>
+              <li><a href="<?php get_the_permalink($campus); ?>"><?php echo get_the_title($campus) ?></a></li>
+        <?php
+          echo '</ul>';
+          }
         }
         ?>
   </div>

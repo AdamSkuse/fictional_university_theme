@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10538,6 +10538,27 @@ exports.default = MobileMenu;
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Search = function Search() {
+  _classCallCheck(this, Search);
+
+  alert('hello i am a search!');
+};
+
+exports.default = Search;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
      _ _      _       _
  ___| (_) ___| | __  (_)___
@@ -13436,7 +13457,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13446,7 +13467,7 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _slickCarousel = __webpack_require__(4);
+var _slickCarousel = __webpack_require__(5);
 
 var _slickCarousel2 = _interopRequireDefault(_slickCarousel);
 
@@ -13462,16 +13483,21 @@ var _GoogleMap = __webpack_require__(1);
 
 var _GoogleMap2 = _interopRequireDefault(_GoogleMap);
 
+var _Search = __webpack_require__(4);
+
+var _Search2 = _interopRequireDefault(_Search);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Instantiate a new object using our modules/classes
-var mobileMenu = new _MobileMenu2.default();
+
 
 // Our modules / classes
 // 3rd party packages from NPM
-
+var mobileMenu = new _MobileMenu2.default();
 var heroSlider = new _HeroSlider2.default();
 var googleMap = new _GoogleMap2.default();
+var search = new _Search2.default();
 
 /***/ })
 /******/ ]);

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10555,6 +10555,68 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var MyNotes = function () {
+  function MyNotes() {
+    _classCallCheck(this, MyNotes);
+
+    this.events();
+  }
+
+  _createClass(MyNotes, [{
+    key: "events",
+    value: function events() {
+      (0, _jquery2.default)(".delete-note").on("click", this.deleteNote);
+    }
+
+    // Methods go here 
+
+  }, {
+    key: "deleteNote",
+    value: function deleteNote() {
+      _jquery2.default.ajax({
+        beforeSend: function beforeSend(xhr) {
+          xhr.setRequestHeader('X-WP-Nonce', universityData.nonce);
+        },
+        url: universityData.root_url + '/wp-json/wp/v2/note/116',
+        type: 'DELETE',
+        success: function success(response) {
+          console.log("success!");
+          console.log(response);
+        },
+        error: function error(response) {
+          console.log("error!");
+          console.log(response);
+        }
+      });
+    }
+  }]);
+
+  return MyNotes;
+}();
+
+exports.default = MyNotes;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var Search = function () {
   // 1. describe and create/initiate our object
   function Search() {
@@ -10671,7 +10733,7 @@ var Search = function () {
 exports.default = Search;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -13572,7 +13634,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13582,7 +13644,7 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _slickCarousel = __webpack_require__(5);
+var _slickCarousel = __webpack_require__(6);
 
 var _slickCarousel2 = _interopRequireDefault(_slickCarousel);
 
@@ -13598,21 +13660,26 @@ var _GoogleMap = __webpack_require__(1);
 
 var _GoogleMap2 = _interopRequireDefault(_GoogleMap);
 
-var _Search = __webpack_require__(4);
+var _Search = __webpack_require__(5);
 
 var _Search2 = _interopRequireDefault(_Search);
+
+var _MyNotes = __webpack_require__(4);
+
+var _MyNotes2 = _interopRequireDefault(_MyNotes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Instantiate a new object using our modules/classes
-
+var mobileMenu = new _MobileMenu2.default();
 
 // Our modules / classes
 // 3rd party packages from NPM
-var mobileMenu = new _MobileMenu2.default();
+
 var heroSlider = new _HeroSlider2.default();
 var googleMap = new _GoogleMap2.default();
 var search = new _Search2.default();
+var mynotes = new _MyNotes2.default();
 
 /***/ })
 /******/ ]);

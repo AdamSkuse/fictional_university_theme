@@ -10566,20 +10566,30 @@ var MyNotes = function () {
     key: "events",
     value: function events() {
       (0, _jquery2.default)(".delete-note").on("click", this.deleteNote);
+      (0, _jquery2.default)(".edit-note").on("click", this.editNote);
     }
 
     // Methods go here 
 
   }, {
+    key: "editNote",
+    value: function editNote(e) {
+      var thisNote = (0, _jquery2.default)(e.target).parents("li");
+      thisNote.find(".note-title-field, .note-body-field").removeAttr("readonly").addClass("note-active-field");
+      thisNote.find(".update-note").addClass("update-note--visible");
+    }
+  }, {
     key: "deleteNote",
-    value: function deleteNote() {
+    value: function deleteNote(e) {
+      var thisNote = (0, _jquery2.default)(e.target).parents("li");
       _jquery2.default.ajax({
         beforeSend: function beforeSend(xhr) {
           xhr.setRequestHeader('X-WP-Nonce', universityData.nonce);
         },
-        url: universityData.root_url + '/wp-json/wp/v2/note/116',
+        url: universityData.root_url + '/wp-json/wp/v2/note/' + thisNote.data('id'),
         type: 'DELETE',
         success: function success(response) {
+          thisNote.slideUp();
           console.log("success!");
           console.log(response);
         },

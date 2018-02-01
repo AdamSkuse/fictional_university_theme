@@ -6,9 +6,10 @@ class MyNotes {
   }
 
   events() {
-  $(".delete-note").on("click", this.deleteNote);
-  $(".edit-note").on("click", this.editNote.bind(this));
-  $(".update-note").on("click", this.updateNote.bind(this));
+  $("#my-notes").on("click", ".delete-note", this.deleteNote);
+  $("#my-notes").on("click", ".edit-note", this.editNote.bind(this));
+  $("#my-notes").on("click", ".update-note", this.updateNote.bind(this));
+  $(".submit-note").on("click", this.createNote.bind(this));
   }
 
   // Methods go here 
@@ -72,6 +73,40 @@ class MyNotes {
       data: ourUpdatedPost,
       success: (response) => {
         this.makeNoteReadOnly(thisNote);
+        console.log("success!");
+        console.log(response);
+      },
+      error: (response) => {
+        console.log("error!");
+        console.log(response);
+      }
+    });
+  }
+
+  createNote(e) {
+    var ourNewPost = {
+      'title': $(".new-note-title").val(),
+      'content': $(".new-note-body").val(),
+      'status': 'publish'
+    }
+    $.ajax({
+      beforeSend: (xhr) => {
+        xhr.setRequestHeader('X-WP-Nonce', universityData.nonce);
+      },
+      url: universityData.root_url + '/wp-json/wp/v2/note/',
+      type: 'POST',
+      data: ourNewPost,
+      success: (response) => {
+        $(".new-note-title, .new-note-body").val('');
+        $(`
+          <li data-id="${response.id}">
+            <input readonly class="note-title-field" value="${response.title.raw}">
+            <span class="edit-note"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</span>
+            <span class="delete-note"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</span>
+            <textarea readonly class="note-body-field">${response.content.raw}</textarea>
+            <span class="update-note btn btn--blue btn--small"><i class="fa fa-arrow-right" aria-hidden="true"></i> Save</span>
+          </li>
+          `).prependTo("#my-notes").hide().slideDown();
         console.log("success!");
         console.log(response);
       },

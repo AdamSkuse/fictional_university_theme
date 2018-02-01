@@ -10565,9 +10565,10 @@ var MyNotes = function () {
   _createClass(MyNotes, [{
     key: "events",
     value: function events() {
-      (0, _jquery2.default)(".delete-note").on("click", this.deleteNote);
-      (0, _jquery2.default)(".edit-note").on("click", this.editNote.bind(this));
-      (0, _jquery2.default)(".update-note").on("click", this.updateNote.bind(this));
+      (0, _jquery2.default)("#my-notes").on("click", ".delete-note", this.deleteNote);
+      (0, _jquery2.default)("#my-notes").on("click", ".edit-note", this.editNote.bind(this));
+      (0, _jquery2.default)("#my-notes").on("click", ".update-note", this.updateNote.bind(this));
+      (0, _jquery2.default)(".submit-note").on("click", this.createNote.bind(this));
     }
 
     // Methods go here 
@@ -10638,6 +10639,33 @@ var MyNotes = function () {
         data: ourUpdatedPost,
         success: function success(response) {
           _this.makeNoteReadOnly(thisNote);
+          console.log("success!");
+          console.log(response);
+        },
+        error: function error(response) {
+          console.log("error!");
+          console.log(response);
+        }
+      });
+    }
+  }, {
+    key: "createNote",
+    value: function createNote(e) {
+      var ourNewPost = {
+        'title': (0, _jquery2.default)(".new-note-title").val(),
+        'content': (0, _jquery2.default)(".new-note-body").val(),
+        'status': 'publish'
+      };
+      _jquery2.default.ajax({
+        beforeSend: function beforeSend(xhr) {
+          xhr.setRequestHeader('X-WP-Nonce', universityData.nonce);
+        },
+        url: universityData.root_url + '/wp-json/wp/v2/note/',
+        type: 'POST',
+        data: ourNewPost,
+        success: function success(response) {
+          (0, _jquery2.default)(".new-note-title, .new-note-body").val('');
+          (0, _jquery2.default)("\n          <li data-id=\"" + response.id + "\">\n            <input readonly class=\"note-title-field\" value=\"" + response.title.raw + "\">\n            <span class=\"edit-note\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> Edit</span>\n            <span class=\"delete-note\"><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i> Delete</span>\n            <textarea readonly class=\"note-body-field\">" + response.content.raw + "</textarea>\n            <span class=\"update-note btn btn--blue btn--small\"><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i> Save</span>\n          </li>\n          ").prependTo("#my-notes").hide().slideDown();
           console.log("success!");
           console.log(response);
         },

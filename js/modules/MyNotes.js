@@ -37,7 +37,6 @@ class MyNotes {
     thisNote.data("state", "cancel");
   }
 
-
   deleteNote(e) {
     var thisNote = $(e.target).parents("li");
     $.ajax({

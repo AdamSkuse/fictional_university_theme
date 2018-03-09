@@ -40,7 +40,7 @@
               $existStatus = 'yes';
             }
           ?>
-            <span class="like-box" data-exists="<?php echo $existStatus; ?>">
+            <span class="like-box" data-professor="<?php the_ID(); ?>" data-exists="<?php echo $existStatus; ?>">
             <i class="fa fa-heart-o" aria-hidden="true"></i>
             <i class="fa fa-heart" aria-hidden="true"></i>
             <span class="like-count"><?php echo $likeCount->found_posts; ?></span>
